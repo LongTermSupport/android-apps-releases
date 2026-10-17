@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speech Recorder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Speech Recorder</h1>
+
+<p>A minimal Android app for long, hands-free dictation. One tap starts recording from a
+Bluetooth headset's microphone, and it keeps recording with the screen off and the phone in a
+pocket.</p>
+
+<ul>
+<li>Audio is saved in one-minute segments, so a crash loses at most the minute in progress.</li>
+<li>Once connected to Google Drive, each finished segment is uploaded to a
+<code>Speech Recorder</code> folder in your own Drive, and removed from the phone only after
+Drive confirms an exact copy.</li>
+<li>An alarm sounds whenever recording is at risk: the headset is lost, the microphone goes
+silent, storage runs low, or the app is stopped.</li>
+</ul>
+
+<p>It needs Android 13 or later. Signed builds are on the
+<a href="https://github.com/LongTermSupport/android-apps-releases/releases">releases page</a>.</p>
+
+<p><a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms of service</a></p>
+</main>
+</body>
+</html>
