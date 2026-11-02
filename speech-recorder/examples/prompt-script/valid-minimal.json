@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "quick-note",
+  "title": "Quick note",
+  "prompts": [
+    { "id": "topic", "text": "What is this recording about?" }
+  ]
+}

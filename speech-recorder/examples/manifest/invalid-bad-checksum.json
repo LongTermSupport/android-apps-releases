@@ -1,0 +1,16 @@
+{
+  "id": "dictation-2026-10-19-090507",
+  "format": "ogg-opus",
+  "startedAt": 1792400707000,
+  "state": "COMPLETE",
+  "lastProgressAt": 1792400827000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-19-090507-001.ogg",
+      "durationMillis": 60000,
+      "bytes": 361000,
+      "md5": "NOT-A-CHECKSUM"
+    }
+  ],
+  "recordedMillis": 60000
+}

@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://longtermsupport.github.io/android-apps-releases/speech-recorder/manifest.schema.json",
+  "title": "Speech Recorder session manifest",
+  "description": "The manifest.json the app uploads to Google Drive beside a session's audio segments. A consumer ignores keys it does not know. AUDIO-FORMAT.md explains the meaning of each key.",
+  "type": "object",
+  "required": ["id", "format", "startedAt", "lastProgressAt", "state", "segments", "recordedMillis"],
+  "properties": {
+    "id": {
+      "description": "The session name, also its folder's name.",
+      "type": "string",
+      "pattern": "^dictation-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}$"
+    },
+    "format": {
+      "description": "How every segment is encoded.",
+      "enum": ["ogg-opus", "wav"]
+    },
+    "startedAt": {
+      "description": "Milliseconds since 1970-01-01 UTC, by the phone's clock.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "lastProgressAt": {
+      "description": "When the app last wrote the manifest while recording, in the same units.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "state": {
+      "enum": ["ACTIVE", "COMPLETE", "INTERRUPTED"]
+    },
+    "segments": {
+      "description": "The segments in recorded order.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/segment" }
+    },
+    "recordedMillis": {
+      "description": "The sum of the segments' durationMillis.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "promptRun": {
+      "description": "Present only for a session run from a prompt script: which script, and where each prompt and answer sits in the audio.",
+      "$ref": "#/$defs/promptRun"
+    },
+    "capture": {
+      "description": "How steadily the app read the microphone: the longest time between two reads, how many of those gaps were as long as the microphone's buffer (long enough for audio to have been dropped without any error), and the audio that certainly was dropped. Absent from recordings made before it was added.",
+      "type": "object",
+      "required": ["longestGapMillis", "overruns"],
+      "properties": {
+        "longestGapMillis": { "type": "integer", "minimum": 0 },
+        "overruns": { "type": "integer", "minimum": 0 },
+        "lostAtLeastMillis": {
+          "description": "A lower bound on the audio dropped: time that passed beyond what the buffer could hold and was never read. 0 does not rule out a smaller loss.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "windSpans": {
+      "description": "Stretches of the audio where wind rumble or clipping was heard, in recorded order. The audio is never changed. Written, empty when nothing was heard, whenever the detector ran; absent when it did not run and from recordings made before it was added.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/windSpan" }
+    }
+  },
+  "$defs": {
+    "windSpan": {
+      "type": "object",
+      "required": ["kind", "startMillis", "endMillis", "strength"],
+      "properties": {
+        "kind": { "enum": ["wind", "clipping"] },
+        "startMillis": {
+          "description": "Audio time from the start of the session, not wall-clock time.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "endMillis": { "type": "integer", "minimum": 0 },
+        "strength": {
+          "description": "0 to 1; 1 is the loudest the detector scales to.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "required": ["name", "durationMillis"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^dictation-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{6}-[0-9]{3,}\\.(ogg|wav)$"
+        },
+        "durationMillis": {
+          "description": "The audio recorded, in milliseconds. 0 means unknown.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "bytes": {
+          "description": "The file's size on Drive. Absent when the segment is missing.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "md5": {
+          "description": "The MD5 checksum of the file on Drive, lower-case hex. Absent when the segment is missing.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "missing": {
+          "description": "True when the segment was no longer on the phone when the upload ran, so is not on Drive.",
+          "const": true
+        },
+        "samples": {
+          "description": "How many samples the segment holds. Present for a session run from a prompt script.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "promptRun": {
+      "type": "object",
+      "required": ["scriptId", "version", "hash", "sampleRate", "takes"],
+      "properties": {
+        "scriptId": {
+          "description": "The id of the prompt script that was run.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "version": {
+          "description": "The version label the app gave the script. A display label: the hash is the identity.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "hash": {
+          "description": "SHA-256, lower-case hex, of the script file after a byte-order mark is removed and line endings are turned into LF.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "fileName": {
+          "description": "Reserved. The app does not write it; a consumer MUST NOT rely on it.",
+          "type": "string"
+        },
+        "sampleRate": {
+          "description": "Samples per second. Every sample offset below counts samples of the session as a whole, in order of recording.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "fields": {
+          "description": "The script's own fields (prompt-script schemaVersion 2), copied from the script. Absent when the script has none. The answer to a prompt whose key is a field name is this value; that prompt was not asked and has no take.",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "takes": {
+          "description": "Each time a prompt was asked, in order.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/take" }
+        }
+      }
+    },
+    "take": {
+      "type": "object",
+      "required": ["promptId", "take", "promptStart"],
+      "properties": {
+        "promptId": {
+          "description": "The id of the prompt in the script.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "take": {
+          "description": "1 for the first attempt at this prompt, then 2 and so on.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "promptStart": {
+          "description": "The sample at which the spoken prompt starts.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "promptEnd": {
+          "description": "The sample at which the spoken prompt ends. Absent while the take is open.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "answerStart": {
+          "description": "The sample at which the answer starts. Absent while the take is open.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "answerEnd": {
+          "description": "The sample at which the answer ends: the next press, or stop. Absent while the answer is open.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "route": {
+          "description": "How the audio was routed when the prompt opened: a Bluetooth headset, or the phone's own microphone and loudspeaker. Absent from takes made before it was added.",
+          "enum": ["headset", "phone"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "dictation-2026-10-19-101500",
+  "format": "wav",
+  "startedAt": 1792404900000,
+  "state": "INTERRUPTED",
+  "lastProgressAt": 1792405020000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-19-101500-001.wav",
+      "durationMillis": 60000,
+      "missing": true
+    },
+    {
+      "name": "dictation-2026-10-19-101500-002.wav",
+      "durationMillis": 0,
+      "bytes": 1200000,
+      "md5": "d41d8cd98f00b204e9800998ecf8427e"
+    }
+  ],
+  "recordedMillis": 60000
+}

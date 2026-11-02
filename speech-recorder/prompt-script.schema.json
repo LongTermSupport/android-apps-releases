@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://longtermsupport.github.io/android-apps-releases/speech-recorder/prompt-script.schema.json",
+  "title": "Speech Recorder prompt script",
+  "description": "A list of prompts the Speech Recorder app reads aloud, one at a time, during a dictation. Further checks the app makes beyond this schema are listed in SPEC.md.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "title", "prompts"],
+  "additionalProperties": false,
+  "if": { "required": ["fields"] },
+  "then": { "properties": { "schemaVersion": { "const": 2 } } },
+  "properties": {
+    "schemaVersion": {
+      "description": "The version of this schema the file follows. The app refuses a higher number than it knows. Version 2 adds fields.",
+      "enum": [1, 2]
+    },
+    "fields": {
+      "description": "Answers the script already knows, keyed by front matter field name (schemaVersion 2). A prompt whose key names one of these is not asked; the values are written to the manifest as promptRun.fields.",
+      "type": "object",
+      "maxProperties": 50,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$", "maxLength": 40 },
+      "additionalProperties": { "type": "string", "pattern": "\\S", "maxLength": 1000 }
+    },
+    "id": {
+      "description": "A stable name for the script: lower-case letters and digits in groups joined by single hyphens.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "title": {
+      "description": "Shown in the app's list of scripts.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "description": "One or two lines about the script, kept with it for the people who write and read the file.",
+      "type": "string",
+      "maxLength": 500
+    },
+    "language": {
+      "description": "A BCP 47 language tag for the voice that reads the prompts. The phone's language when absent.",
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+      "maxLength": 35
+    },
+    "prompts": {
+      "description": "The prompts, in the order they are read.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": { "$ref": "#/$defs/prompt" }
+    }
+  },
+  "$defs": {
+    "prompt": {
+      "type": "object",
+      "required": ["id", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "A stable name, unique in the file. It does not change when the text is reworded, because recordings are matched to prompts by it.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "maxLength": 64
+        },
+        "text": {
+          "description": "What is read aloud.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "key": {
+          "description": "The name of the front matter field the answer fills, for tools that read the recordings. Unique in the file.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "maxLength": 40
+        },
+        "hint": {
+          "description": "A note for the people who write and read the file. Never read aloud.",
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    }
+  }
+}

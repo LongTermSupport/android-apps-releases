@@ -1,0 +1,20 @@
+{
+  "id": "dictation-2026-10-23-101500",
+  "format": "ogg-opus",
+  "startedAt": 1792491300000,
+  "state": "COMPLETE",
+  "lastProgressAt": 1792491420000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-23-101500-001.ogg",
+      "durationMillis": 60000,
+      "bytes": 361000,
+      "md5": "9e107d9d372bb6826bd81d3542a419d6"
+    }
+  ],
+  "recordedMillis": 60000,
+  "windSpans": [
+    { "kind": "wind", "startMillis": 12300, "endMillis": 15800, "strength": 0.62 },
+    { "kind": "clipping", "startMillis": 40050, "endMillis": 40400, "strength": 1 }
+  ]
+}

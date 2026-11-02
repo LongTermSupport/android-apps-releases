@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "blank",
+  "title": "Empty text",
+  "prompts": [
+    { "id": "a", "text": "" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "walk-notes",
+  "title": "Walk notes",
+  "description": "Two filing questions, then free dictation prompts.",
+  "language": "en-GB",
+  "prompts": [
+    {
+      "id": "topic",
+      "key": "topic",
+      "text": "What is this recording about?",
+      "hint": "A few words are enough."
+    },
+    {
+      "id": "project",
+      "key": "project",
+      "text": "Which project does it belong to?"
+    },
+    {
+      "id": "ideas",
+      "text": "Tell me the ideas you want to capture."
+    }
+  ]
+}

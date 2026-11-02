@@ -1,0 +1,53 @@
+{
+  "id": "dictation-2026-10-19-090507",
+  "format": "ogg-opus",
+  "startedAt": 1792400707000,
+  "state": "COMPLETE",
+  "lastProgressAt": 1792400827000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-19-090507-001.ogg",
+      "durationMillis": 60000,
+      "samples": 960000,
+      "bytes": 361000,
+      "md5": "9e107d9d372bb6826bd81d3542a419d6"
+    },
+    {
+      "name": "dictation-2026-10-19-090507-002.ogg",
+      "durationMillis": 42500,
+      "samples": 680000,
+      "bytes": 256000,
+      "md5": "e4d909c290d0fb1ca068ffaddf22cbd0"
+    }
+  ],
+  "recordedMillis": 102500,
+  "promptRun": {
+    "scriptId": "walk-notes",
+    "version": 1,
+    "hash": "18c768ddcd1a99ee6717a2e2765f200ed7dbaf3d4cd9f1e0c823b547fe76766d",
+    "fileName": "walk-notes.json",
+    "fields": {
+      "project": "Dead by Friday"
+    },
+    "sampleRate": 16000,
+    "takes": [
+      {
+        "promptId": "topic",
+        "take": 1,
+        "promptStart": 16000,
+        "promptEnd": 64000,
+        "answerStart": 64000,
+        "answerEnd": 208000,
+        "route": "headset"
+      },
+      {
+        "promptId": "project",
+        "take": 1,
+        "promptStart": 208000,
+        "promptEnd": 256000,
+        "answerStart": 256000,
+        "route": "phone"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "dictation-2026-10-19-090507",
+  "format": "ogg-opus",
+  "startedAt": 1792400707000,
+  "state": "COMPLETE",
+  "lastProgressAt": 1792400827000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-19-090507-001.ogg",
+      "durationMillis": 60000,
+      "samples": 960000
+    }
+  ],
+  "recordedMillis": 60000,
+  "promptRun": {
+    "scriptId": "walk-notes",
+    "version": 1,
+    "hash": "not-a-hash",
+    "sampleRate": 16000,
+    "takes": []
+  }
+}

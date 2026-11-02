@@ -1,0 +1,22 @@
+{
+  "id": "dictation-2026-10-19-090507",
+  "format": "ogg-opus",
+  "startedAt": 1792400707000,
+  "state": "COMPLETE",
+  "lastProgressAt": 1792400827000,
+  "segments": [
+    {
+      "name": "dictation-2026-10-19-090507-001.ogg",
+      "durationMillis": 60000,
+      "bytes": 361000,
+      "md5": "9e107d9d372bb6826bd81d3542a419d6"
+    },
+    {
+      "name": "dictation-2026-10-19-090507-002.ogg",
+      "durationMillis": 42500,
+      "bytes": 256000,
+      "md5": "e4d909c290d0fb1ca068ffaddf22cbd0"
+    }
+  ],
+  "recordedMillis": 102500
+}

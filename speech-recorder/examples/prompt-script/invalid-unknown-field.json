@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "extra",
+  "title": "Unknown field",
+  "colour": "blue",
+  "prompts": [
+    { "id": "a", "text": "Hello?" }
+  ]
+}

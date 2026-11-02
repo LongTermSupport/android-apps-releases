@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "id": "earlier-chapters-walk",
+  "title": "Earlier chapters walk",
+  "description": "Script-level fields answer the filing questions, so only the content is asked.",
+  "language": "en-GB",
+  "fields": {
+    "topic": "Earlier chapters",
+    "project": "book"
+  },
+  "prompts": [
+    {
+      "id": "topic",
+      "key": "topic",
+      "text": "What is this recording about?"
+    },
+    {
+      "id": "project",
+      "key": "project",
+      "text": "Which project does it belong to?"
+    },
+    {
+      "id": "first-point",
+      "text": "Tell me the first point you want to make."
+    }
+  ]
+}

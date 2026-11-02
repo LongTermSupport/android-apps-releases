@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "Not A Slug",
+  "title": "Bad id",
+  "prompts": [
+    { "id": "a", "text": "Hello?" }
+  ]
+}

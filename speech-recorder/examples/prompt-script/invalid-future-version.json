@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 3,
+  "id": "future",
+  "title": "A newer schema",
+  "prompts": [
+    { "id": "a", "text": "Hello?" }
+  ]
+}
