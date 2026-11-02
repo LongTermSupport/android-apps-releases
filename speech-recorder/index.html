@@ -27,6 +27,28 @@ silent, storage runs low, or the app is stopped.</li>
 (Android 13 or later). Earlier signed builds are on the
 <a href="https://github.com/LongTermSupport/android-apps-releases/releases">releases page</a>.</p>
 
+<h2>Prompt scripts</h2>
+
+<p>Instead of dictating freely, the app can read a <em>prompt script</em> aloud one prompt at a
+time and record your answer to each. A script is a small JSON file: an id, a title and a list of
+prompts. Import it from a file on the phone or from an https address, and the app saves it,
+speaks each prompt still to be answered, and records a take per answer. Each recording's
+manifest says which take answers which prompt, so a tool can file and transcribe the recording
+without anyone listening.</p>
+
+<ul>
+<li><strong>Have an AI agent write one.</strong> Point your agent at
+<a href="https://raw.githubusercontent.com/LongTermSupport/android-apps-releases/main/speech-recorder/script-prompt.md">script-prompt.md</a>.
+It says what to ask you first, the rules the importer enforces, and how to hand the file over.</li>
+<li><strong>Write one by hand or build a tool.</strong> The
+<a href="https://github.com/LongTermSupport/android-apps-releases/blob/main/speech-recorder/SPEC.md">specification</a>
+is the full contract. Alongside it are the
+<a href="https://github.com/LongTermSupport/android-apps-releases/blob/main/speech-recorder/prompt-script.schema.json">prompt script schema</a>,
+the <a href="https://github.com/LongTermSupport/android-apps-releases/blob/main/speech-recorder/manifest.schema.json">manifest schema</a>,
+the <a href="https://github.com/LongTermSupport/android-apps-releases/blob/main/speech-recorder/AUDIO-FORMAT.md">audio format</a>
+and some <a href="https://github.com/LongTermSupport/android-apps-releases/tree/main/speech-recorder/examples">examples</a>.</li>
+</ul>
+
 <p><a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms of service</a></p>
 </main>
 </body>
